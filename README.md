@@ -27,7 +27,7 @@ Projeto educativo e independente. O objetivo não é bater recorde de métrica: 
 | Fase | Entrega | Conceito central | Status |
 |---|---|---|---|
 | 0. Ambiente | Repositório e ambiente reproduzível | Ferramentas e reprodutibilidade | concluída |
-| 1. Problema | Classes, custo do erro e meta de precision | A métrica é decisão de negócio | pendente |
+| 1. Problema | Classes, custo do erro e meta de precision | A métrica é decisão de negócio | concluída |
 | 2. Auditoria | Diagnóstico das imagens e das anotações | Dado ruim limita qualquer modelo | pendente |
 | 3. Divisão | Treino, validação e teste por grupo | Vazamento infla a métrica | pendente |
 | 4. Baseline | YOLO pequeno pré-treinado ajustado | Transfer learning | pendente |
@@ -99,10 +99,11 @@ Preenchidas na Fase 1.
 
 | Decisão | Valor | Justificativa |
 |---|---|---|
-| Classes | | |
-| Erro mais caro | | |
-| Meta de precision para `defeito` | | |
-| Métrica principal | | |
+| Classes | `isolador` e `defeito` | O isolador dá contexto de localização, separa erro de localização de erro de diagnóstico e permite um pipeline em dois estágios na Fase 7 |
+| Erro mais caro | FN de `defeito` | Um defeito não detectado pode causar falha na linha; um alarme falso custa segundos de revisão. Premissa de 10 a 20x, conservadora, com análise de sensibilidade na Fase 5 |
+| Unidade de avaliação | Caixa e imagem | Por imagem, porque o inspetor revisa imagens; por caixa, para não esconder defeitos perdidos em imagens com mais de um defeito. FP por imagem mede a carga de revisão |
+| Meta | Recall de `defeito` por imagem ≥ 0,95 (restrição); maximizar precision, com piso de 0,50 | O recall é inegociável pelo custo assimétrico; se o piso de precision não for atingível com o recall exigido, o piso é revisto e registrado |
+| Métrica de comparação | mAP@0.5 e mAP@0.5:0.95 | Só para comparar experimentos; a decisão de operação usa o ponto da curva definido acima |
 
 ## Princípios
 
