@@ -32,9 +32,7 @@ cv-inspecao-isoladores/
 │   ├── interim/             convertidos para o formato YOLO
 │   └── processed/           divisão final train / val / test
 ├── docs/
-│   ├── SPEC.md              especificação
-│   ├── ARQUITETURA.md       este documento
-│   └── DIARIO.md            o que foi feito e aprendido em cada fase
+│   └── ARQUITETURA.md       este documento
 ├── notebooks/               exploração e visualização
 ├── src/
 │   ├── data/                download, conversão, auditoria
@@ -80,10 +78,10 @@ Cada execução de treino grava em `runs/<exp>/`:
 - o hash do commit (`git rev-parse HEAD`);
 - as métricas finais em CSV.
 
-O `reports/` guarda só o que é leve e explica o resultado (tabelas e gráficos). O `docs/DIARIO.md` registra, por fase, o que foi feito, o que deu errado e o que foi aprendido.
+O `reports/` guarda só o que é leve e explica o resultado (tabelas e gráficos).
 
 ## 6. Fluxo de Git
 
 - Branch `main` sempre estável.
-- Ao fim de cada fase: commit com a mensagem `fase N: <resumo>` e tag da fase (ver SPEC, seção 7).
+- Ao fim de cada fase: commit com a mensagem `fase N: <resumo>` e tag da fase (ver a tabela de fases no README).
 - Antes de cada push: conferir com `git status` que nada de `data/`, `runs/` ou `models/` entrou no commit.
