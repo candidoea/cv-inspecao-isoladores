@@ -1,0 +1,9 @@
+nome: exp01_baseline
+descricao: Baseline com configuração padrão da Ultralytics
+modelo: yolo11n.pt          # nano: o menor e mais rápido; pré-treinado no COCO
+dados: data/processed/cplid.yaml
+epochs: 50                  # quantas vezes o modelo passa pelo treino inteiro
+imgsz: 640                  # tamanho da imagem no treino (lado maior, em pixels)
+batch: 16                   # imagens processadas por vez
+patience: 20                # para antes se a validação não melhorar em 20 épocas
+seed: 42
