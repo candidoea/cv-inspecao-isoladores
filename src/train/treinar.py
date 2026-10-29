@@ -3,6 +3,7 @@ import json
 import subprocess
 from pathlib import Path
 
+import torch
 import ultralytics
 import yaml
 from ultralytics import YOLO
@@ -40,6 +41,8 @@ registro = {
     "arquivo_config": args.config,
     "commit": commit,
     "ultralytics": ultralytics.__version__,
+    "torch": torch.__version__,
+    "dispositivo": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
     "pasta": str(pasta),
 }
 (pasta / "registro.json").write_text(json.dumps(registro, indent=2, ensure_ascii=False), encoding="utf-8")

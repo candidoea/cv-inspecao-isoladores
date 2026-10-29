@@ -15,7 +15,7 @@
   <img alt="OpenCV" src="https://img.shields.io/badge/OpenCV-imagens-0f2d4a?logo=opencv&logoColor=white">
   <img alt="FiftyOne" src="https://img.shields.io/badge/FiftyOne-inspe%C3%A7%C3%A3o-0f2d4a">
   <img alt="Dados" src="https://img.shields.io/badge/dados-p%C3%BAblicos-f5a623">
-  <img alt="Fase" src="https://img.shields.io/badge/fase-3%20de%208-f5a623">
+  <img alt="Fase" src="https://img.shields.io/badge/fase-4%20de%208-f5a623">
 </p>
 
 ---
@@ -30,7 +30,7 @@ Projeto educativo e independente. O objetivo não é bater recorde de métrica: 
 | 1. Problema | Classes, custo do erro e meta de precision | A métrica é decisão de negócio | concluída |
 | 2. Auditoria | Diagnóstico das imagens e das anotações | Dado ruim limita qualquer modelo | concluída |
 | 3. Divisão | Treino, validação e teste por grupo | Vazamento infla a métrica | concluída |
-| 4. Baseline | YOLO pequeno pré-treinado ajustado | Transfer learning | pendente |
+| 4. Baseline | YOLO pequeno pré-treinado ajustado | Transfer learning | concluída |
 | 5. Avaliação | Precision e recall por classe, limiar por classe | O mAP sozinho engana | pendente |
 | 6. Erros | Galeria de FP e FN agrupada por causa | O erro mostra o que melhorar | pendente |
 | 7. Melhorias | Tiling, augmentation e peso por classe | Desbalanceamento e objeto pequeno | pendente |
@@ -97,6 +97,14 @@ python src/split/dividir.py        # divisão estratificada por origem, sem divi
 ```
 
 A divisão usada no projeto está registrada em `configs/split.csv`. Detalhes em [`reports/fase3/divisao.md`](reports/fase3/divisao.md).
+
+Fase 4, baseline. O treino roda no Google Colab com GPU, porque em CPU cada época leva cerca de 7 minutos. O passo a passo, do upload dos dados ao treino, está em `notebooks/04_treino_colab.ipynb`:
+
+```bash
+python src/train/treinar.py configs/exp01_baseline.yaml
+```
+
+Cada execução grava em `runs/<nome>/registro.json` a configuração, o commit e o ambiente. Resultados e leitura em [`reports/fase4/baseline.md`](reports/fase4/baseline.md).
 
 Os comandos das próximas fases entram aqui à medida que forem concluídas.
 
