@@ -15,7 +15,7 @@
   <img alt="OpenCV" src="https://img.shields.io/badge/OpenCV-imagens-0f2d4a?logo=opencv&logoColor=white">
   <img alt="FiftyOne" src="https://img.shields.io/badge/FiftyOne-inspe%C3%A7%C3%A3o-0f2d4a">
   <img alt="Dados" src="https://img.shields.io/badge/dados-p%C3%BAblicos-f5a623">
-  <img alt="Fase" src="https://img.shields.io/badge/fase-0%20de%208-f5a623">
+  <img alt="Fase" src="https://img.shields.io/badge/fase-2%20de%208-f5a623">
 </p>
 
 ---
@@ -28,7 +28,7 @@ Projeto educativo e independente. O objetivo não é bater recorde de métrica: 
 |---|---|---|---|
 | 0. Ambiente | Repositório e ambiente reproduzível | Ferramentas e reprodutibilidade | concluída |
 | 1. Problema | Classes, custo do erro e meta de precision | A métrica é decisão de negócio | concluída |
-| 2. Auditoria | Diagnóstico das imagens e das anotações | Dado ruim limita qualquer modelo | pendente |
+| 2. Auditoria | Diagnóstico das imagens e das anotações | Dado ruim limita qualquer modelo | concluída |
 | 3. Divisão | Treino, validação e teste por grupo | Vazamento infla a métrica | pendente |
 | 4. Baseline | YOLO pequeno pré-treinado ajustado | Transfer learning | pendente |
 | 5. Avaliação | Precision e recall por classe, limiar por classe | O mAP sozinho engana | pendente |
@@ -76,7 +76,19 @@ python -m pip install -r requirements.txt
 yolo checks
 ```
 
-Os comandos de cada fase entram aqui à medida que as fases forem concluídas.
+Fase 2, auditoria dos dados (a base precisa estar em `data/raw/cplid`, ver seção Dados):
+
+```powershell
+git clone --depth 1 https://github.com/InsulatorData/InsulatorDataSet.git data/raw/cplid
+python src/data/inventario.py           # tabela de anotações
+python src/data/estatisticas_imagem.py  # brilho, nitidez, tamanho e hash por imagem
+python src/data/quase_duplicatas.py     # duplicatas e sequência
+python src/data/converter.py            # conversão para YOLO em data/interim
+```
+
+A análise completa, com perguntas, hipóteses e gráficos, está em `notebooks/02_auditoria.ipynb`.
+
+Os comandos das próximas fases entram aqui à medida que forem concluídas.
 
 ## Estrutura
 
@@ -115,7 +127,17 @@ Preenchidas na Fase 1.
 
 ## Dados
 
-Somente bases públicas de imagens de isoladores. Imagens, anotações e pesos não fazem parte do repositório; a origem, a licença e a versão usadas ficam registradas aqui na Fase 2.
+| Item | Valor |
+|---|---|
+| Base | CPLID, Chinese Power Line Insulator Dataset |
+| Origem | https://github.com/InsulatorData/InsulatorDataSet |
+| Versão | commit `1f6349f619237344d49905090ecf2704505394a4` (19/11/2018) |
+| Licença | Sem licença explícita; uso educativo, sem redistribuição das imagens |
+| Observação | Segundo a descrição da base, as imagens normais foram capturadas por drone e as imagens com defeito são sintéticas |
+
+Imagens, anotações e pesos não fazem parte deste repositório.
+
+**Limitação principal:** as imagens com defeito são composições sintéticas e diferem das normais em nitidez, compressão e brilho. O tamanho do arquivo sozinho separa as duas origens. Detalhes e os 13 achados da auditoria em [`reports/fase2/auditoria.md`](reports/fase2/auditoria.md).
 
 ## Autoria
 

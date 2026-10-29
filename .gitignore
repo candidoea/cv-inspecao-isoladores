@@ -5,9 +5,9 @@ __pycache__/
 .ipynb_checkpoints/
 
 # dados, pesos e saídas de treino (nunca vão para o repositório)
-data/
-runs/
-models/
+/data/
+/runs/
+/models/
 *.pt
 *.onnx
 
@@ -18,3 +18,8 @@ Thumbs.db
 # Docs de uso pessoal
 docs/SPEC.md
 docs/DIARIO.md
+docs/ESTUDO*.md
+
+# saídas que contêm dados ou imagens da base (sem licença de redistribuição)
+reports/fase2/anotacoes.csv
+reports/fase2/g3_exemplos.png

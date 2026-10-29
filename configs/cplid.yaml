@@ -1,0 +1,4 @@
+train: ./images
+names:
+  0: isolador
+  1: defeito

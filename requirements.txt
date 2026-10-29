@@ -3,3 +3,5 @@ opencv-python
 fiftyone
 matplotlib
 pandas
+imagehash
+ipykernel
