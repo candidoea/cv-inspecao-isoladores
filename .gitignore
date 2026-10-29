@@ -23,3 +23,5 @@ docs/ESTUDO*.md
 # saídas que contêm dados ou imagens da base (sem licença de redistribuição)
 reports/fase2/anotacoes.csv
 reports/fase2/g3_exemplos.png
+reports/fase3/*.png
+reports/fase3/embeddings.npy

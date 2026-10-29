@@ -15,7 +15,7 @@
   <img alt="OpenCV" src="https://img.shields.io/badge/OpenCV-imagens-0f2d4a?logo=opencv&logoColor=white">
   <img alt="FiftyOne" src="https://img.shields.io/badge/FiftyOne-inspe%C3%A7%C3%A3o-0f2d4a">
   <img alt="Dados" src="https://img.shields.io/badge/dados-p%C3%BAblicos-f5a623">
-  <img alt="Fase" src="https://img.shields.io/badge/fase-2%20de%208-f5a623">
+  <img alt="Fase" src="https://img.shields.io/badge/fase-3%20de%208-f5a623">
 </p>
 
 ---
@@ -29,7 +29,7 @@ Projeto educativo e independente. O objetivo não é bater recorde de métrica: 
 | 0. Ambiente | Repositório e ambiente reproduzível | Ferramentas e reprodutibilidade | concluída |
 | 1. Problema | Classes, custo do erro e meta de precision | A métrica é decisão de negócio | concluída |
 | 2. Auditoria | Diagnóstico das imagens e das anotações | Dado ruim limita qualquer modelo | concluída |
-| 3. Divisão | Treino, validação e teste por grupo | Vazamento infla a métrica | pendente |
+| 3. Divisão | Treino, validação e teste por grupo | Vazamento infla a métrica | concluída |
 | 4. Baseline | YOLO pequeno pré-treinado ajustado | Transfer learning | pendente |
 | 5. Avaliação | Precision e recall por classe, limiar por classe | O mAP sozinho engana | pendente |
 | 6. Erros | Galeria de FP e FN agrupada por causa | O erro mostra o que melhorar | pendente |
@@ -56,7 +56,7 @@ flowchart LR
 | Etapa | Módulo | O que faz |
 |---|---|---|
 | Dados | `src/data/` | Download, conversão de anotações e auditoria |
-| Divisão | `src/split/` | Split por grupo e teste de vazamento |
+| Divisão | `src/split/` | Embeddings, grupos de imagens parecidas e divisão estratificada |
 | Treino | `src/train/` | Treino a partir de um YAML por experimento |
 | Avaliação | `src/evaluate/` | Métricas por classe, curva PR e limiar por classe |
 | Análise | `src/analyze/` | Galeria de erros e agrupamento por causa |
@@ -87,6 +87,16 @@ python src/data/converter.py            # conversão para YOLO em data/interim
 ```
 
 A análise completa, com perguntas, hipóteses e gráficos, está em `notebooks/02_auditoria.ipynb`.
+
+Fase 3, divisão em treino, validação e teste por grupo de imagens parecidas:
+
+```powershell
+python src/split/similaridade.py   # embeddings (ResNet18) e similaridade entre imagens
+python src/split/grupos.py         # grupos de imagens da mesma cena
+python src/split/dividir.py        # divisão estratificada por origem, sem dividir grupos
+```
+
+A divisão usada no projeto está registrada em `configs/split.csv`. Detalhes em [`reports/fase3/divisao.md`](reports/fase3/divisao.md).
 
 Os comandos das próximas fases entram aqui à medida que forem concluídas.
 
